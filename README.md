@@ -8,6 +8,7 @@ Shell for testing CakePHP Application using Behat
 - Add the plugin to your app/Config/bootstrap.php using `CakePlugin::load('Behat')`
 - Run `Console/cake Behat.behat install` to install plugin
 - Set your application root url into app/Config/behat.yml
+- Make behat executable `chmod +x Console/behat`
 - Run `Console/behat -dl` to be sure that everything properly loaded
 
 ## Usage
