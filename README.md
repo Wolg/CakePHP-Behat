@@ -14,6 +14,12 @@ Shell for testing CakePHP Application using Behat
 
 will be filled soon
 
+## Requirements
+
+* PHP version: PHP 5.3+
+* CakePHP version: 2.x
+* PHPUnit
+
 ## Contributing
 
 1. Fork it
