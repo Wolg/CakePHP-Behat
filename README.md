@@ -20,10 +20,10 @@ Shell for testing CakePHP Application using Behat
 ## Further Reading
 
 * [Quick Intro to Behat](http://docs.behat.org/quick_intro.html) - Read Quick Intro Guide.
-* [Practical BDD with Behat and Mink][http://www.slideshare.net/jmikola1/pratical-bdd-with-behat-and-mink] - An introduction into behavior-driven development with Behat and Mink.
-* [Behat Documentation][http://docs.behat.org/index.html] - Read Behat2 Documentation Guides.
-* [Behat by example][https://speakerdeck.com/everzet/behat-by-example] - Check presentation from the creator.
-* [Mink Documentation][http://mink.behat.org/] - Read about Mink and Web acceptance testing.
+* [Practical BDD with Behat and Mink](http://www.slideshare.net/jmikola1/pratical-bdd-with-behat-and-mink) - An introduction into behavior-driven development with Behat and Mink.
+* [Behat Documentation](http://docs.behat.org/index.html) - Read Behat2 Documentation Guides.
+* [Behat by example](https://speakerdeck.com/everzet/behat-by-example) - Check presentation from the creator.
+* [Mink Documentation](http://mink.behat.org/) - Read about Mink and Web acceptance testing.
 
 ## Contributing
 
