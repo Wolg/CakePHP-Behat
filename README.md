@@ -17,7 +17,7 @@ Shell for testing CakePHP Application using Behat
 * CakePHP version: 2.x
 * PHPUnit
  
-== Further Reading
+## Further Reading
 
 * {Quick Intro to Behat}[http://docs.behat.org/quick_intro.html] - Read Quick Intro Guide.
 * {Practical BDD with Behat and Mink}[http://www.slideshare.net/jmikola1/pratical-bdd-with-behat-and-mink] - An introduction into behavior-driven development with Behat and Mink.
