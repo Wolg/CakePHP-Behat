@@ -62,19 +62,19 @@ class BehatShell extends Shell {
         // Install Behat
         if (!file_exists($this->behatFile)) {
             $this->out('Downloading behat.phar...');
-            $this->download('https://github.com/downloads/Behat/Behat/behat.phar', $this->behatFile);
+            $this->__download('https://github.com/downloads/Behat/Behat/behat.phar', $this->behatFile);
             $this->out('Done');
         }
         // Install Mink
         if (!file_exists($this->minkFile)) {
             $this->out('Downloading mink.phar...');
-            $this->download('https://github.com/downloads/Behat/Mink/mink.phar', $this->minkFile);
+            $this->__download('https://github.com/downloads/Behat/Mink/mink.phar', $this->minkFile);
             $this->out('Done');
         }
         // Install Mink Extension for Behat
         if (!file_exists($this->minkExtFile)) {
             $this->out('Downloading mink_extension.phar...');
-            $this->download('https://github.com/downloads/Behat/MinkExtension/mink_extension.phar', $this->minkExtFile);
+            $this->__download('https://github.com/downloads/Behat/MinkExtension/mink_extension.phar', $this->minkExtFile);
             $this->out('Done');
         }
         // Setup Behat Console
@@ -169,7 +169,7 @@ class BehatShell extends Shell {
      * @param string $path
      * @return void
      */
-    private function download($url, $path) {
+    private function __download($url, $path) {
         $file = fopen($url, 'rb');
         if ($file) {
             $newFile = fopen($path, 'wb');
