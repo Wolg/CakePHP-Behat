@@ -103,7 +103,7 @@ class BehatShell extends Shell {
         // Internal encoding to utf8
         mb_internal_encoding('utf8');
         // Get rid of Cake default args
-        $args = $this->cleanArgs($_SERVER['argv']);
+        $args = $this->_cleanArgs($_SERVER['argv']);
         // Create instance of BehatApplication
         $this->behatApp = new Behat\Behat\Console\BehatApplication(BEHAT_VERSION);
 
@@ -128,7 +128,7 @@ class BehatShell extends Shell {
      * @param array $args
      * @return array
      */
-    protected function cleanArgs($args) {
+    protected function _cleanArgs($args) {
         while ($args[0] != 'Behat.behat') {
             array_shift($args);
         }
