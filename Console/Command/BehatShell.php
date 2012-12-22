@@ -13,6 +13,17 @@ App::uses('File', 'Utility');
 class BehatShell extends Shell {
 
     /**
+     * An storage of links to PHAR archives
+     *
+     * @var array
+     */
+    public $storage = array(
+        'behat.phar' => 'http://behat.org/downloads/behat.phar',
+        'mink.phar' => 'http://behat.org/downloads/mink.phar',
+        'mink_extension.phar' => 'http://behat.org/downloads/mink_extension.phar',
+    );
+
+    /**
      * Behat File path
      *
      * @string
@@ -59,23 +70,9 @@ class BehatShell extends Shell {
      * @return void
      */
     public function install() {
-        // Install Behat
-        if (!file_exists($this->behatFile)) {
-            $this->out('Downloading behat.phar...');
-            $this->__download('https://github.com/downloads/Behat/Behat/behat.phar', $this->behatFile);
-            $this->out('Done');
-        }
-        // Install Mink
-        if (!file_exists($this->minkFile)) {
-            $this->out('Downloading mink.phar...');
-            $this->__download('https://github.com/downloads/Behat/Mink/mink.phar', $this->minkFile);
-            $this->out('Done');
-        }
-        // Install Mink Extension for Behat
-        if (!file_exists($this->minkExtFile)) {
-            $this->out('Downloading mink_extension.phar...');
-            $this->__download('https://github.com/downloads/Behat/MinkExtension/mink_extension.phar', $this->minkExtFile);
-            $this->out('Done');
+        // Download all the things
+        foreach ($this->storage as $name => $link) {
+            $this->__install($name, $link);
         }
         // Setup Behat Console
         $file = new File($this->_getPath() . DS . 'skel' . DS . 'behat');
@@ -160,6 +157,31 @@ class BehatShell extends Shell {
      */
     protected function _getPath() {
         return App::pluginPath('Behat');
+    }
+
+    /**
+     * __install method
+     *
+     * @param string $name
+     * @param string $link
+     *
+     * @return void
+     */
+    private function __install($name, $link) {
+        switch ($name) {
+            case 'behat.phar' :
+                $filePath = $this->behatFile; break;
+            case 'mink.phar' :
+                $filePath = $this->minkFile; break;
+            case 'mink_extension.phar' :
+                $filePath = $this->minkExtFile; break;
+            default : $filePath = '';
+        }
+        if (!file_exists($filePath)) {
+            $this->out("Downloading {$name}...");
+            $this->__download($link, $filePath);
+            $this->out('Done');
+        }
     }
 
     /**
