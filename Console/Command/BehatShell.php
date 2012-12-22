@@ -107,7 +107,7 @@ class BehatShell extends Shell {
         // Create instance of BehatApplication
         $this->behatApp = new Behat\Behat\Console\BehatApplication(BEHAT_VERSION);
 
-        if(!in_array('--config', $args) && !in_array('-c', $args) && !$this->isCommand($args)) {
+        if(!in_array('--config', $args) && !in_array('-c', $args) && !$this->_isCommand($args)) {
             array_push($args, '--config', APP . 'Config' . DS . 'behat.yml');
         }
         $this->behatApp->run(new Symfony\Component\Console\Input\ArgvInput($args));
@@ -141,7 +141,7 @@ class BehatShell extends Shell {
      * @param array $args
      * @return boolean
      */
-    protected function isCommand($args) {
+    protected function _isCommand($args) {
         $isCommand = false;
         $definition = $this->behatApp->getDefinition();
         foreach($args as $arg) {
