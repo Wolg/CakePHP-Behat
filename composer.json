@@ -24,8 +24,5 @@
     "require": {
         "php": ">=5.3.0",
         "composer/installers": "*"
-    },
-    "scripts": {
-        "post-package-install": "./Console/cake Behat.behat install"
     }
 }
