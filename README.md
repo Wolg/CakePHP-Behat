@@ -4,19 +4,37 @@ Shell for testing CakePHP Application using Behat
 
 ## Installation
 
-- Unzip or clone this plugin into your app/Plugin/Behat folder.
+Behat Shell is installed use Composer.
+
+Ensure `require` is present in `composer.json`. This will install the plugin to `Plugin/Behat`. You should also add either `behat/mink-goutte-driver` or `behat/mink-selenium2-driver` to your requirements, depending on which one you plan to use with Behat Shell.
+
+```
+{
+    "require": {
+        "wolg/behat": "*",
+        "phpunit/phpunit": "*",
+        "cakephp/cakephp": "2.*",
+        "behat/behat": "2.4.*@stable"
+    }
+}
+```
+
 - Add the plugin to your app/Config/bootstrap.php using `CakePlugin::load('Behat')`
 - Run `Console/cake Behat.behat install` to install plugin
 - Set your application root url into app/Config/behat.yml
-- Make behat executable `chmod +x Console/behat`
 - Run `Console/behat -dl` to be sure that everything properly loaded
+
+
+### But I don't use Composer?
+
+That's fine, the process is laregly the same. However, instead of downloading Behat Shell using composer, you'll need to unzip or clone this plugin into your app/Plugin/Behat folder. After that, follow the rest of the steps outlined in the previous section. Don't worry about dependencies, we'll download those for you.
 
 ## Requirements
 
 * PHP version: PHP 5.3+
 * CakePHP version: 2.x
 * PHPUnit
- 
+
 ## Further Reading
 
 * [Quick Intro to Behat](http://docs.behat.org/quick_intro.html) - Read Quick Intro Guide.
