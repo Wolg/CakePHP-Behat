@@ -59,13 +59,24 @@ class BehatShell extends Shell {
     public function startup() {
         $this->out('Cake Behat Shell');
         $this->hr();
-        $this->behatFile = $this->_getPath() . 'Vendor' . DS . 'behat.phar';
-        $this->minkFile = $this->_getPath() . 'Vendor' . DS . 'mink.phar';
-        $this->minkExtFile = $this->_getPath() . 'Vendor' . DS . 'mink_extension.phar';
+
+        $paths = array(
+            'behatFile' => $this->_getPath() . 'Vendor' . DS . 'behat.phar',
+            'minkFile' => $this->_getPath() . 'Vendor' . DS . 'mink.phar',
+            'minkExtFile' => $this->_getPath() . 'Vendor' . DS . 'mink_extension.phar'
+        );
+
+        foreach ($paths as $key => $path) {
+            if (file_exists($path)) {
+                $this->$key = $path;
+            }
+        }
     }
 
     /**
      * Install method
+     *
+     * Don't use this if you're using
      *
      * @return void
      */
@@ -77,7 +88,9 @@ class BehatShell extends Shell {
         // Setup Behat Console
         $file = new File($this->_getPath() . DS . 'skel' . DS . 'behat');
         $this->out('Copying behat to App/Console...');
-        $file->copy(APP . 'Console'.  DS . 'behat');
+        $file->copy($path = APP . 'Console'.  DS . 'behat');
+        chmod($path, 0755);
+
         // Setup Behat Config
         $file = new File($this->_getPath() . DS . 'skel' . DS . 'behat.yml');
         $this->out('Copying behat.yml to App/Config...');
@@ -94,9 +107,18 @@ class BehatShell extends Shell {
      * @return void
      */
     public function main() {
-        require_once 'phar://' . $this->behatFile . '/vendor/autoload.php';
-        require_once 'phar://' . $this->minkFile . '/vendor/autoload.php';
-        require_once 'phar://' . $this->minkExtFile . '/init.php';
+        if ($this->behatFile) {
+            require_once 'phar://' . $this->behatFile . '/vendor/autoload.php';
+        }
+
+        if ($this->minkFile) {
+            require_once 'phar://' . $this->minkFile . '/vendor/autoload.php';
+        }
+
+        if ($this->minkExtFile) {
+            require_once 'phar://' . $this->minkExtFile . '/init.php';
+        }
+
         // Internal encoding to utf8
         mb_internal_encoding('utf8');
         // Get rid of Cake default args
@@ -107,6 +129,7 @@ class BehatShell extends Shell {
         if(!in_array('--config', $args) && !in_array('-c', $args) && !$this->_isCommand($args)) {
             array_push($args, '--config', APP . 'Config' . DS . 'behat.yml');
         }
+
         $this->behatApp->run(new Symfony\Component\Console\Input\ArgvInput($args));
     }
 
@@ -177,7 +200,7 @@ class BehatShell extends Shell {
                 $filePath = $this->minkExtFile; break;
             default : $filePath = '';
         }
-        if (!file_exists($filePath)) {
+        if ($filePath && !file_exists($filePath)) {
             $this->out("Downloading {$name}...");
             $this->__download($link, $filePath);
             $this->out('Done');
